@@ -4,9 +4,12 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ccc.projects.lavoisier_api_v3.models.ListResponse;
 import com.ccc.projects.lavoisier_api_v3.models.Personal;
 import com.ccc.projects.lavoisier_api_v3.repositories.PersonalRepository;
 
@@ -24,6 +27,11 @@ public class PersonalService {
             throw new NoSuchElementException("Personal not found");
         }
         return personalOptional.get();
+    }
+
+    public ListResponse<Personal> list(UUID id, Pageable pageable) {
+        Page<Personal> page = repository.findByIdNot(id, pageable);
+        return new ListResponse<>(page.getContent(), page.getTotalElements());
     }
 
     public Personal createOne(Personal data) {
