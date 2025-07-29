@@ -35,13 +35,17 @@ public class Personal {
     @Column(nullable = false)
     private String telefono;
 
+    @NotBlank(message = "Email is required")
+    @Column(nullable = false, unique = true)
+    private String email;
+
     @NotBlank(message = "Password is required")
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @NotNull(message = "Role is required")
+    @NotNull(message = "Rol is required")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ValidRoles role;
+    private ValidRoles rol;
 }
