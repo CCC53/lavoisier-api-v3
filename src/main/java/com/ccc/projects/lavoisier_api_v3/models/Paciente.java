@@ -1,12 +1,15 @@
 package com.ccc.projects.lavoisier_api_v3.models;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
 
 import com.ccc.projects.lavoisier_api_v3.dto.ValidGenres;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -37,7 +40,8 @@ public class Paciente {
 
     @NotNull(message = "Nacimiento is required")
     @Column(nullable = false)
-    private Date nacimiento;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+    private LocalDate nacimiento;
 
     @NotNull(message = "Genre is required")
     @Enumerated(EnumType.STRING)
@@ -53,11 +57,17 @@ public class Paciente {
     private String email;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "paciente")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonManagedReference
     private List<Cita> citas;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "paciente")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonManagedReference
     private List<Antropometria> antropometricos;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "paciente")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonManagedReference
     private List<Laboratorial> laboratoriales;
 }

@@ -46,16 +46,16 @@ public class PersonalService {
         Optional<Personal> perOptional = repository.findById(id);
         if (perOptional.isPresent()) {
             Personal personal = perOptional.get();
-            if (personal.getNombre() != null) {
+            if (data.getNombre() != null) {
                 personal.setNombre(data.getNombre());
             }
-            if (personal.getEmail() != null) {
+            if (data.getEmail() != null) {
                 personal.setEmail(data.getEmail());
             }
-            if (personal.getTelefono() != null) {
+            if (data.getTelefono() != null) {
                 personal.setTelefono(data.getTelefono());
             }
-            if (personal.getRol() != null) {
+            if (data.getRol() != null) {
                 personal.setRol(data.getRol());
             }
             return repository.save(personal);

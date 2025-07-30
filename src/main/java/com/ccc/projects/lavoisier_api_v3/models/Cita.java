@@ -17,6 +17,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Data
 @Entity @Table(name = "citas")
 public class Cita {
@@ -38,5 +40,6 @@ public class Cita {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "pacienteId", nullable = false)
+    @JsonBackReference
     private Paciente paciente;
 }

@@ -17,8 +17,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Data
-@Entity @Table(name = "laboratorial")
+@Entity @Table(name = "laboratoriales")
 @NoArgsConstructor
 public class Laboratorial {
     @Id
@@ -54,6 +56,7 @@ public class Laboratorial {
     private Double ldl;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "pacienteId", nullable = false)
+    @JoinColumn(name = "paciente_id", nullable = false)
+    @JsonBackReference
     private Paciente paciente;
 }

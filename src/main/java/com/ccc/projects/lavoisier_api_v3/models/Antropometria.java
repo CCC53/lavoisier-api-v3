@@ -17,6 +17,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Data
 @Entity @Table(name = "antropometria")
 @NoArgsConstructor
@@ -46,22 +48,23 @@ public class Antropometria {
     private Double cintura;
 
     @NotNull(message = "cBrazo is required")
-    @Column(nullable = false)
+    @Column(name = "c_brazo", nullable = false)
     private Double cBrazo;
 
     @NotNull(message = "pTriceps is required")
-    @Column(nullable = false)
+    @Column(name = "p_triceps", nullable = false)
     private Double pTriceps;
 
     @NotNull(message = "pAbdominal is required")
-    @Column(nullable = false)
+    @Column(name = "p_abdominal", nullable = false)
     private Double pAbdominal;
 
     @NotNull(message = "porcentajeGrasa is required")
-    @Column(nullable = false)
+    @Column(name = "porcentaje_grasa", nullable = false)
     private Double porcentajeGrasa;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "pacienteId", nullable = false)
+    @JoinColumn(name = "paciente_id", nullable = false)
+    @JsonBackReference
     private Paciente paciente;
 }
