@@ -40,7 +40,7 @@ public class Paciente {
 
     @NotNull(message = "Nacimiento is required")
     @Column(nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate nacimiento;
 
     @NotNull(message = "Genre is required")

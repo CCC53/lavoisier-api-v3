@@ -3,8 +3,8 @@ package com.ccc.projects.lavoisier_api_v3.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ccc.projects.lavoisier_api_v3.models.Paciente;
-import com.ccc.projects.lavoisier_api_v3.services.PacienteService;
+import com.ccc.projects.lavoisier_api_v3.dto.CreateOrUpdateCitaRecord;
+import com.ccc.projects.lavoisier_api_v3.services.CitaService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,14 +24,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/paciente")
-public class PacienteController {
-    private final PacienteService service;
+@RequestMapping("/api/cita")
+public class CitaController {
+    private final CitaService service;
 
     @GetMapping
-    public ResponseEntity<?> list(@RequestParam(defaultValue = "10") int pageSize, @RequestParam(defaultValue = "0") int page) {
+    public ResponseEntity<?> list(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
         return ResponseEntity.ok(service.findAll(pageable));
     }
@@ -42,18 +43,18 @@ public class PacienteController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody Paciente data) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("data", service.createOne(data)));
+    public ResponseEntity<?> create(@Valid @RequestBody CreateOrUpdateCitaRecord data) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("data", service.create(data)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody Paciente data, @PathVariable UUID id) {
-        return ResponseEntity.ok(Map.of("data", service.updateOne(id, data)));
+    public ResponseEntity<?> update(@Valid @RequestBody CreateOrUpdateCitaRecord entity, @PathVariable UUID id) {
+        return ResponseEntity.ok(Map.of("data", service.update(entity, id)));
     }
     
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteOne(@PathVariable UUID id) {
-        return ResponseEntity.status(HttpStatus.OK).body(Map.of("removed", service.deleteOne(id)));
+        return ResponseEntity.ok(Map.of("removed", service.deleteOne(id)));
     }
     
 }
