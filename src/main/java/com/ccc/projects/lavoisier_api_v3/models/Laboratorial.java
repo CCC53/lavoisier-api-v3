@@ -1,6 +1,6 @@
 package com.ccc.projects.lavoisier_api_v3.models;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
@@ -13,11 +13,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Data
 @Entity @Table(name = "laboratoriales")
@@ -27,31 +27,25 @@ public class Laboratorial {
     @GeneratedValue @UuidGenerator
     private UUID id;
 
-    @NotNull(message = "Fecha is required")
     @Column(nullable = false)
-    private Date fecha;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDate fecha;
 
-    @NotNull(message = "glucosa is required")
     @Column(nullable = false)
     private Double glucosa;
 
-    @NotNull(message = "insulina is required")
     @Column(nullable = false)
     private Double insulina;
 
-    @NotNull(message = "trigliceridos is required")
     @Column(nullable = false)
     private Double trigliceridos;
 
-    @NotNull(message = "colesterolTotal is required")
     @Column(nullable = false)
     private Double colesterolTotal;
 
-    @NotNull(message = "hdl is required")
     @Column(nullable = false)
     private Double hdl;
 
-    @NotNull(message = "ldl is required")
     @Column(nullable = false)
     private Double ldl;
 
