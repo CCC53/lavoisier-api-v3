@@ -17,6 +17,7 @@ import lombok.Data;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Data
 @Entity @Table(name = "citas")
@@ -38,5 +39,6 @@ public class Cita {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "pacienteId", nullable = false)
     @JsonBackReference
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Paciente paciente;
 }

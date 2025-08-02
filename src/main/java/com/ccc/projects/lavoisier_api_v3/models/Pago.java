@@ -6,8 +6,10 @@ import org.hibernate.annotations.UuidGenerator;
 
 import com.ccc.projects.lavoisier_api_v3.dto.MetodosPago;
 import com.ccc.projects.lavoisier_api_v3.dto.TipoPago;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -17,7 +19,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,29 +30,25 @@ public class Pago {
     @GeneratedValue @UuidGenerator
     private UUID id;
 
-    @NotNull(message = "monto is required")
     @Column(nullable = false)
     private Double monto;
-
-    @NotNull(message = "metodoPago is required")
+    
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, name = "metodo_pago")
     private MetodosPago metodoPago;
 
-    @NotNull(message = "tipoPago is required")
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Convert(converter = TipoPagoConverter.class)
+    @Column(nullable = false, name = "tipo_pago")
     private TipoPago tipoPago;
-
-    @NotNull(message = "cantidadRecibida is required")
-    @Column(nullable = false)
+    
+    @Column(nullable = false, name = "cantidad_recibida")
     private Double cantidadRecibida;
 
-    @NotNull(message = "cambio is required")
     @Column(nullable = false)
     private Double cambio;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "citaId", nullable = false)
+    @JoinColumn(name = "cita_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Cita cita;
 }
