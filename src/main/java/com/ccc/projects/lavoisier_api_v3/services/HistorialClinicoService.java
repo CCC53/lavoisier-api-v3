@@ -48,7 +48,6 @@ public class HistorialClinicoService {
         historialClinico.setSedentarismo(data.sedentarismo());
         historialClinico.setDrogas(data.drogas());
         historialClinico.setCafe(data.cafe());
-        historialClinico.setAlimentacion(data.alimentacion());
         historialClinico.setPaciente(paciente);
         
         return historialClinicoRepository.save(historialClinico);
@@ -68,7 +67,6 @@ public class HistorialClinicoService {
             historialClinico.setSedentarismo(data.sedentarismo());
             historialClinico.setDrogas(data.drogas());
             historialClinico.setCafe(data.cafe());
-            historialClinico.setAlimentacion(data.alimentacion());
             historialClinico.setPaciente(paciente);
 
             return historialClinicoRepository.save(historialClinico);

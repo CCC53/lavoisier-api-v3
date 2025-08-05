@@ -1,5 +1,6 @@
 package com.ccc.projects.lavoisier_api_v3.controllers;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ccc.projects.lavoisier_api_v3.dto.CreateOrUpdateHistorialRecord;
+import com.ccc.projects.lavoisier_api_v3.services.CloudinaryService;
 import com.ccc.projects.lavoisier_api_v3.services.HistorialClinicoService;
 
 import jakarta.validation.Valid;
@@ -29,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/historial-clinico")
 public class HistorialClinicoController {
     private final HistorialClinicoService service;
+    private final CloudinaryService cloudinaryService;
 
     @GetMapping
     public ResponseEntity<?> list(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int pageSize) {
@@ -49,5 +53,10 @@ public class HistorialClinicoController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@Valid @RequestBody CreateOrUpdateHistorialRecord data, @PathVariable UUID id) {
         return ResponseEntity.ok(Map.of("data", service.update(data, id)));
+    }
+
+    @PutMapping("/upload/{id}")
+    public ResponseEntity<?> uploadFile(@PathVariable UUID id, @RequestParam("file") MultipartFile file) throws IOException {
+        return ResponseEntity.ok(Map.of("data", cloudinaryService.updateAlimentation(file, id)));
     }
 }

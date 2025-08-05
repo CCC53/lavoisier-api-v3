@@ -2,7 +2,6 @@ package com.ccc.projects.lavoisier_api_v3.dto;
 
 import java.util.UUID;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record CreateOrUpdateHistorialRecord(
@@ -14,7 +13,6 @@ public record CreateOrUpdateHistorialRecord(
     @NotNull(message = "sedentarismo is required") EnfermedadesResponse sedentarismo,
     @NotNull(message = "drogas is required") EnfermedadesResponse drogas,
     @NotNull(message = "cafe is required") EnfermedadesResponse cafe,
-    @NotBlank(message = "alimentacion is required") String alimentacion,
     @NotNull(message = "PacienteId is required") UUID pacienteId
 ) {
 
