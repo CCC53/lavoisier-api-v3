@@ -18,7 +18,7 @@ public class JWTUtil {
     private Long expiresIn;
 
     public String generateJWT(String email, String role, String id) {
-        return Jwts.builder().subject(email).claim("role", role).claim("id", id).issuedAt(new Date(System.currentTimeMillis() + expiresIn))
+        return Jwts.builder().subject(email).claim("role", role).claim("id", id).issuedAt(new Date()).expiration(new Date(System.currentTimeMillis() + expiresIn))
             .signWith(Keys.hmacShaKeyFor(seed.getBytes()), Jwts.SIG.HS256).compact();
     }
 
