@@ -39,7 +39,7 @@ public class AntropometriaService {
     public Antropometria create(CreateOrUpdateAntrometriaRecord data) {
         Antropometria antropometriaDB = new Antropometria();
         Paciente paciente = pacienteRepository.findById(data.pacienteId()).orElse(null);
-        antropometriaDB.setFecha(data.fecha());
+        antropometriaDB.setFecha(data.fecha().toLocalDate());
         antropometriaDB.setPeso(data.peso());
         antropometriaDB.setTalla(data.talla());
         antropometriaDB.setImc(data.imc());
@@ -58,7 +58,7 @@ public class AntropometriaService {
         if (antrOpt.isPresent()) {
             Antropometria antropometriaDB = antrOpt.get();
             Paciente paciente = pacienteRepository.findById(data.pacienteId()).orElse(null);
-            antropometriaDB.setFecha(data.fecha());
+            antropometriaDB.setFecha(data.fecha().toLocalDate());
             antropometriaDB.setPeso(data.peso());
             antropometriaDB.setTalla(data.talla());
             antropometriaDB.setImc(data.imc());

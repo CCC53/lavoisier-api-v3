@@ -30,7 +30,7 @@ public class Cita {
     private String motivo;
 
     @Column(nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
     private LocalDate fecha;
 
     @Column(nullable = false)

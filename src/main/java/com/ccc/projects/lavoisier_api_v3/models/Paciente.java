@@ -22,8 +22,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -35,25 +33,20 @@ public class Paciente {
     @GeneratedValue @UuidGenerator
     UUID id;
 
-    @NotBlank(message = "Name is required")
     @Column(nullable = false)
     private String nombre;
 
-    @NotNull(message = "Nacimiento is required")
     @Column(nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
     private LocalDate nacimiento;
 
-    @NotNull(message = "Genre is required")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ValidGenres sexo;
 
-    @NotBlank(message = "Phone is required")
     @Column(nullable = false)
     private String telefono;
 
-    @NotBlank(message = "Email is required")
     @Column(nullable = false, unique = true)
     private String email;
 

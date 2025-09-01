@@ -40,7 +40,7 @@ public class CitaService {
         Cita citaDB = new Cita();
         Paciente paciente = pacienteRepository.findById(data.paciente()).orElse(null);
         citaDB.setMotivo(data.motivo());
-        citaDB.setFecha(data.fecha());
+        citaDB.setFecha(data.fecha().toLocalDate());
         citaDB.setHorario(data.horario());
         citaDB.setPaciente(paciente);
         return citaRepository.save(citaDB);
@@ -52,7 +52,7 @@ public class CitaService {
             Cita cita = citaOpt.get();
             Paciente paciente = pacienteRepository.findById(data.paciente()).orElse(null);
             cita.setMotivo(data.motivo());
-            cita.setFecha(data.fecha());
+            cita.setFecha(data.fecha().toLocalDate());
             cita.setHorario(data.horario());
             cita.setPaciente(paciente);
             return citaRepository.save(cita);

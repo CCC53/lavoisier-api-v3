@@ -3,7 +3,7 @@ package com.ccc.projects.lavoisier_api_v3.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ccc.projects.lavoisier_api_v3.models.Paciente;
+import com.ccc.projects.lavoisier_api_v3.dto.CreateOrUpdatePacienteRecord;
 import com.ccc.projects.lavoisier_api_v3.services.PacienteService;
 
 import jakarta.validation.Valid;
@@ -42,12 +42,12 @@ public class PacienteController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody Paciente data) {
+    public ResponseEntity<?> create(@Valid @RequestBody CreateOrUpdatePacienteRecord data) {
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("data", service.createOne(data)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody Paciente data, @PathVariable UUID id) {
+    public ResponseEntity<?> update(@Valid @RequestBody CreateOrUpdatePacienteRecord data, @PathVariable UUID id) {
         return ResponseEntity.ok(Map.of("data", service.updateOne(id, data)));
     }
     

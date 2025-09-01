@@ -11,6 +11,8 @@ import org.springframework.beans.BeanWrapperImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import com.ccc.projects.lavoisier_api_v3.dto.CreateOrUpdatePacienteRecord;
 import com.ccc.projects.lavoisier_api_v3.models.ListResponse;
 import com.ccc.projects.lavoisier_api_v3.models.Paciente;
 import com.ccc.projects.lavoisier_api_v3.repositories.PacienteRepository;
@@ -41,11 +43,17 @@ public class PacienteService {
         return pacienteOpt.get();
     }
 
-    public Paciente createOne(Paciente data) {
-        return repository.save(data);
+    public Paciente createOne(CreateOrUpdatePacienteRecord data) {
+        Paciente paciente = new Paciente();
+        paciente.setNombre(data.nombre());
+        paciente.setNacimiento(data.nacimiento().toLocalDate());
+        paciente.setSexo(data.sexo());
+        paciente.setTelefono(data.telefono());
+        paciente.setEmail(data.email());
+        return repository.save(paciente);
     }
 
-    public Paciente updateOne(UUID id, Paciente data) {
+    public Paciente updateOne(UUID id, CreateOrUpdatePacienteRecord data) {
         return repository.findById(id).map(existing -> {
             BeanUtils.copyProperties(data, existing, getNullPropertyNames(data));
             return repository.save(existing);

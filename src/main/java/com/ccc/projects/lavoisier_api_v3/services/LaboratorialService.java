@@ -40,7 +40,7 @@ public class LaboratorialService {
         Laboratorial laboratorialDB = new Laboratorial();
         Paciente paciente = pacienteRepository.findById(data.pacienteId()).orElse(null);
 
-        laboratorialDB.setFecha(data.fecha());
+        laboratorialDB.setFecha(data.fecha().toLocalDate());
         laboratorialDB.setGlucosa(data.glucosa());
         laboratorialDB.setInsulina(data.insulina());
         laboratorialDB.setTrigliceridos(data.trigliceridos());
@@ -58,7 +58,7 @@ public class LaboratorialService {
             Laboratorial laboratorialDB = labOpt.get();
             Paciente paciente = pacienteRepository.findById(data.pacienteId()).orElse(null);
 
-            laboratorialDB.setFecha(data.fecha());
+            laboratorialDB.setFecha(data.fecha().toLocalDate());
             laboratorialDB.setGlucosa(data.glucosa());
             laboratorialDB.setInsulina(data.insulina());
             laboratorialDB.setTrigliceridos(data.trigliceridos());
