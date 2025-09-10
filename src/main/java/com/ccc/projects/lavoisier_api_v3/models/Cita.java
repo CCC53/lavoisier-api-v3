@@ -15,7 +15,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -38,7 +38,7 @@ public class Cita {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "pacienteId", nullable = false)
-    @JsonBackReference
+    @JsonManagedReference
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Paciente paciente;
 }

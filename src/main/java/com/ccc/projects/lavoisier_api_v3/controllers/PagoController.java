@@ -41,7 +41,7 @@ public class PagoController {
         return ResponseEntity.ok(Map.of("data", service.findOne(id)));
     }
 
-    @GetMapping("/{citaId}")
+    @GetMapping("/cita/{citaId}")
     public ResponseEntity<?> findByCita(@PathVariable UUID citaId) {
         return ResponseEntity.ok(Map.of("data", service.findOneByCita(citaId)));
     }
